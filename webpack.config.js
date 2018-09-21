@@ -6,13 +6,13 @@ const APP_DIR = path.resolve(__dirname, 'src');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './src/index.html',
+  template: path.resolve(APP_DIR, 'index.html'),
   inject: 'body'
 })
 
 const config = {
   mode: 'development',
-  entry: APP_DIR + '/index.js',
+  entry: path.resolve(APP_DIR, 'index.js'),
   module: {
     rules: [
       {
@@ -25,7 +25,7 @@ const config = {
           }
         },
         exclude: /node_modules/,
-        exclude: path.resolve(ROOT_DIR, '/app.js')
+        exclude: path.resolve(ROOT_DIR, 'app.js')
       },
       {
         test: /\.css$/,
@@ -49,7 +49,7 @@ const config = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './public'
+    contentBase: path.resolve('public')
   },
   node: {
     fs: 'empty'

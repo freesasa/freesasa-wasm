@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# To run this you need to have an Emscripten environment setup
+
 emcc -o freesasa.js \
      freesasa/src/classifier.c \
      freesasa/src/classifier_naccess.c \
@@ -24,7 +28,6 @@ emcc -o freesasa.js \
      -s TOTAL_MEMORY=167772160 \
      -s ENVIRONMENT=web \
      -s EXPORT_NAME=freesasa \
-     -s MODULARIZE=1
-
-mv freesasa.wasm public/
-mv freesasa.js src/
+     -s MODULARIZE=1 && \
+     mv freesasa.wasm public/ && \
+     mv freesasa.js src/
