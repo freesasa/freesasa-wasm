@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
-import Result from './Result';
 
 import freesasa from './freesasa.js';
 
@@ -37,6 +36,12 @@ class App extends Component {
     });
   }
 
+  submit(e) {
+    e.preventDefault();
+    console.log(e);
+    this.fetchPDB();
+  }
+
   setPDB(code) {
     this.setState({pdbCode: code});
   }
@@ -45,14 +50,14 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">FreeSASA WASM Demo</h1>
         </header>
-        <input type="text" value={this.state.pdbCode} onChange={evt => this.setPDB(evt.target.value)}/>
-        <button onClick={this.fetchPDB()}>calculate</button>
+        <form onSubmit={(e) => this.submit(e)}>
+          <input type="text" placeholder="PDB code" value={this.state.pdbCode} onChange={e => this.setPDB(e.target.value)} />
+          <button>Calculate</button>
+        </form>
+        {this.state && this.state.result ? <h2>Results</h2> : ''}
         <pre>{this.state && this.state.result}</pre>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
