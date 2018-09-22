@@ -25,9 +25,10 @@ emcc -o freesasa.js \
      -s WASM=1 -s FORCE_FILESYSTEM=1 -s \
      EXPORTED_FUNCTIONS='["_freesasa_run"]' \
      -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap", "FS"]' \
-     -s TOTAL_MEMORY=167772160 \
+     -s ALLOW_MEMORY_GROWTH=1 \
      -s ENVIRONMENT=web \
      -s EXPORT_NAME=freesasa \
      -s MODULARIZE=1 && \
+
      mv freesasa.wasm src/ && \
      mv freesasa.js src/

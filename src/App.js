@@ -52,6 +52,7 @@ class App extends Component {
         FS.writeFile('err', '');
 
         const ret = freesasa_run(pdbCode, 'out', 'err');
+
         this.setState({loading: false});
 
         if (ret) {
@@ -96,7 +97,7 @@ class App extends Component {
         {this.state && this.state.result ? <h2>Results</h2> : ''}
         <pre className="result">{this.state && this.state.result}</pre>
         {this.state && this.state.error ? <h2>Errors</h2> : ''}
-        <p className="error">{this.state && this.state.error}</p>
+        <pre className="error">{this.state && this.state.error}</pre>
       </div>
     );
   }
