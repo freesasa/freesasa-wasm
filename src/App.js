@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
-
 import freesasa from './freesasa.js';
+import freesasaModule from './freesasa.wasm';
 
 let freesasa_run;
 let FS;
-freesasa().then(Module => {
+
+// need this to get webpack to do the right thing
+freesasa({
+  locateFile(path) {
+    if (path.endsWith('.wasm')) {
+      return freesasaModule;
+    }
+    return path;
+  }
+}).then(Module => {
   freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string'])
   FS = Module.FS;
 });

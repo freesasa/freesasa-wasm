@@ -29,5 +29,5 @@ emcc -o freesasa.js \
      -s ENVIRONMENT=web \
      -s EXPORT_NAME=freesasa \
      -s MODULARIZE=1 && \
-     mv freesasa.wasm public/ && \
+     mv freesasa.wasm src/ && \
      mv freesasa.js src/

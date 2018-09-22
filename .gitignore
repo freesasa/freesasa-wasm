@@ -4,3 +4,5 @@ node_modules
 # built files
 *.wasm
 src/freesasa.js
+dist
+bundle.js

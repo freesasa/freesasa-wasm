@@ -4,13 +4,11 @@ const ROOT_DIR = path.resolve(__dirname);
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const APP_DIR = path.resolve(__dirname, 'src');
 
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: path.resolve(APP_DIR, 'index.html'),
-  inject: 'body'
-})
+const ManifestPlugin = require('webpack-manifest-plugin');
 
-const config = {
+module.exports = {
   mode: 'development',
   entry: path.resolve(APP_DIR, 'index.js'),
   module: {
@@ -42,18 +40,19 @@ const config = {
       extensions: [".js", ".jsx"]
   },
   plugins: [
-    HtmlWebpackPluginConfig
+    new HtmlWebpackPlugin({
+      template: path.resolve(APP_DIR, 'index.html'),
+      inject: 'body',
+      title: 'production'
+    }),
+    new CleanWebpackPlugin(['dist']),
+    new ManifestPlugin(),
   ],
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: path.resolve('public')
-  },
   node: {
     fs: 'empty'
   }
 }
-
-module.exports = config
