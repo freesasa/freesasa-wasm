@@ -75,7 +75,6 @@ class App extends Component {
 
   submit(e) {
     e.preventDefault();
-    console.log(e);
     this.fetchPDB();
   }
 
