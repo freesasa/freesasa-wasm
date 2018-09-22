@@ -7,7 +7,7 @@ import freesasa from './freesasa.js';
 let freesasa_run;
 let FS;
 freesasa().then(Module => {
-  freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string'])
+  freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string'])
   FS = Module.FS;
 });
 
@@ -16,23 +16,50 @@ class App extends Component {
     super();
     this.state = {
       result: '',
-      pdbCode: ''
+      error: '',
+      pdbCode: '',
+      loading: false,
     }
   }
 
   fetchPDB() {
-    const pdbCode = this.state.pdbCode;
+    const pdbCode = this.state.pdbCode.toLowerCase();
     if (!pdbCode.match(/\w\w\w\w/)) {
       return;
     }
+    this.setState({loading: true, error: '', result: ''});
 
     window.fetch('https://files.rcsb.org/download/' + pdbCode + '.pdb')
-    .then(response => response.text())
+    .then(response => {
+      if (response.status === 404) {
+        this.setState({loading: false})
+        throw Error('404: Couldn\'t find PDB with code ' + pdbCode);
+      }
+      return response.text();
+    })
     .then(text => {
-        FS.writeFile('/pdb', text);
-        FS.writeFile('/out', '');
-        freesasa_run('/pdb', '/out');
-        this.setState({result: String.fromCharCode.apply(null, FS.readFile('/out'))});
+        FS.writeFile(pdbCode, text);
+        FS.writeFile('out', '');
+        FS.writeFile('err', '');
+
+        const ret = freesasa_run(pdbCode, 'out', 'err');
+        this.setState({loading: false});
+
+        if (ret) {
+          this.setState({error: String.fromCharCode.apply(null, FS.readFile('err'))});
+          return;
+        }
+
+        this.setState({
+          result: String.fromCharCode.apply(null, FS.readFile('out')),
+          error: String.fromCharCode.apply(null, FS.readFile('err'))
+        });
+    })
+    .catch(err => {
+      console.error(err);
+      this.setState({
+        error: err.message
+      });
     });
   }
 
@@ -56,8 +83,11 @@ class App extends Component {
           <input type="text" placeholder="PDB code" value={this.state.pdbCode} onChange={e => this.setPDB(e.target.value)} />
           <button>Calculate</button>
         </form>
+        {this.state && this.state.loading ? <p>Loading</p> : '' }
         {this.state && this.state.result ? <h2>Results</h2> : ''}
-        <pre>{this.state && this.state.result}</pre>
+        <pre className="result">{this.state && this.state.result}</pre>
+        {this.state && this.state.error ? <h2>Errors</h2> : ''}
+        <p className="error">{this.state && this.state.error}</p>
       </div>
     );
   }
