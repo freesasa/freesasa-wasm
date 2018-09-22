@@ -86,7 +86,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">FreeSASA WASM Demo</h1>
+          <h1 className="App-title">FreeSASA Demo</h1>
         </header>
         <form onSubmit={(e) => this.submit(e)}>
           <input type="text" placeholder="PDB code" value={this.state.pdbCode} onChange={e => this.setPDB(e.target.value)} />

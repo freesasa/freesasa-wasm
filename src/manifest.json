@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "FreeSASA WASM Demo",
+  "name": "Run FreeSASA in your browser",
   "icons": [
     {
       "src": "favicon.ico",
