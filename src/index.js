@@ -38,7 +38,7 @@ function setState(type, value) {
     rootEl.removeChild(rootEl.firstChild);
   }
   rootEl.className = type;
-  submitButton.setAttribute("disabled",  false);
+  submitButton.removeAttribute("disabled");
 
   console.log(type, value);
   switch (type) {
