@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json">
-    <link rel="shortcut icon" href="favicon.ico">
-    <title>FreeSASA Demo</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="freesasa.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<div class="app">
+    <header>
+        <h1>FreeSASA Demo</h1>
+    </header>
+    <main>
+        <form id="pdb-form">
+            <label>
+            PDB code
+            <input id="pdb-input" type="text" />
+            </label>
+            <button>Calculate</button>
+        </form>
+        <div id="output"></div>
+    </main>
+    <footer>
+        Powered by <a href="https://github.com/freesasa/freesasa-wasm">freesasa-wasm</a>
+    </footer>
+</div>
+</body>
+
 </html>
