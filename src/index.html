@@ -5,7 +5,9 @@
     <title>FreeSASA Demo</title>
     <link rel="stylesheet" href="app.css">
     <meta name="viewport" content="width=device-width">
-    <script src="freesasa.js"></script>
+    <script nomodule>
+      alert("This app only works in modern browsers");
+    </script>
     <script src="index.js"></script>
 </head>
 <body>
@@ -13,15 +15,20 @@
     <header>
         <h1>FreeSASA Demo</h1>
     </header>
+    <noscript>
+        This application requires browser support for Javascript (ES6) and WebAssembly
+    </noscript>
     <main>
         <form id="pdb-form">
             <label>
-            PDB code
-            <input id="pdb-input" type="text" />
+                PDB code
+                <input id="pdb-input" type="text" />
             </label>
-            <button>Calculate</button>
+            <button id="submit" disabled="true">Calculate</button>
         </form>
-        <div id="output"></div>
+        <div id="output">
+            <p>Loading FreeSASA ...</p>
+        </div>
     </main>
     <footer>
         Powered by <a href="https://github.com/freesasa/freesasa-wasm">freesasa-wasm</a>

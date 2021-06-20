@@ -65,4 +65,9 @@ button {
     text-align: center;
 }
 
+button[disabled="true"] {
+    background-color: #555;
+    color: #aaa
+}
+
 

@@ -1,10 +1,23 @@
 let freesasa_run;
 let FS;
 
-freesasa().then(Module => {
-  freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string'])
-  FS = Module.FS;
-});
+const states = {
+  ready: "ready",
+  loading: "loading",
+  calculating: "calculating",
+  notFound: "not-found",
+  otherError: "other-error",
+  calculationFailed: "calculation-failed",
+  success: "success"
+};
+
+import("/freesasa.mjs")
+  .then(obj => obj.default())
+  .then(Module => {
+    freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string'])
+    FS = Module.FS;
+    setState(states.ready);
+  });
 
 // wrap in fake async to allow DOM changes to propagate before starting CPU blocking calculation
 async function calcFreesasa(pdbCode, out, err) {
@@ -17,23 +30,21 @@ async function calcFreesasa(pdbCode, out, err) {
   );
 }
 
-const states = {
-  loading: "loading",
-  calculating: "calculating",
-  notFound: "not-found",
-  otherError: "other-error",
-  calculationFailed: "calculation-failed",
-  success: "success"
-}
-
 function setState(type, value) {
   const rootEl = document.getElementById("output");
+  const submitButton = document.getElementById("submit");
+
   while (rootEl.firstChild) {
     rootEl.removeChild(rootEl.firstChild);
   }
   rootEl.className = type;
+  submitButton.setAttribute("disabled",  false);
+
   console.log(type, value);
   switch (type) {
+    case states.ready: {
+      break;
+    }
     case states.loading: {
       const p = document.createElement("p");
       p.innerText = "Loading structure ...";

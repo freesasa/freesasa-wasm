@@ -2,7 +2,7 @@
 
 # To run this you need to have an Emscripten environment setup
 
-emcc -o freesasa.js \
+emcc -o freesasa.mjs \
      freesasa/src/classifier.c \
      freesasa/src/classifier_naccess.c \
      freesasa/src/classifier_protor.c \
@@ -21,6 +21,8 @@ emcc -o freesasa.js \
      freesasa/src/node.c \
      freesasa/src/util.c \
      freesasa-wasm.c \
+     -O3 \
+     -g0 \
      -DUSE_JSON=0 -DUSE_XML=0 \
      -s WASM=1 -s FORCE_FILESYSTEM=1 -s \
      EXPORTED_FUNCTIONS='["_freesasa_run"]' \
@@ -31,4 +33,4 @@ emcc -o freesasa.js \
      -s MODULARIZE=1 && \
 
      mv freesasa.wasm src/ && \
-     mv freesasa.js src/
+     mv freesasa.mjs src/
