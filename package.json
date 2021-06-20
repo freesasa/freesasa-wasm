@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "scripts": {
     "build:wasm": "sh ./build.sh",
+    "build:dist": "npm run build:wasm && mkdir -p dist && cp src/index.html src/index.js src/freesasa.js src/freesasa.wasm src/app.css dist/",
     "start": "node dev-server.js"
   },
   "devDependencies": {

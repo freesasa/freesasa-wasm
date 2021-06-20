@@ -12,3 +12,6 @@ To get started, clone the repo and type:
     npm start
 
 Then go to http://localhost:8080/ and type in a PDB code.
+
+All files needed to serve the application statically are copied to the
+`dist` folder on `npm run build:dist`.
