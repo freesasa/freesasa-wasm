@@ -11,7 +11,7 @@ const states = {
   success: "success"
 };
 
-import("/freesasa.mjs")
+import("./freesasa.mjs")
   .then(obj => obj.default())
   .then(Module => {
     freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string'])
