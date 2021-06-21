@@ -1,6 +1,7 @@
 body {
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 .app {
@@ -12,12 +13,22 @@ body {
     align-items: center;
 }
 
-header {
+header, footer {
     width: 100%;
     background-color: black;
     color: white;
     margin: 0;
     padding: 15px;
+}
+
+a:visited {
+    color: white;
+}
+a:hover {
+    color: lightblue;
+}
+a:active {
+    color: white;
 }
 
 main {
@@ -30,6 +41,12 @@ footer {
 
 h1, h2 {
     margin: 0;
+}
+
+@media (max-width: 800px) {
+    h1 {
+        font-size: 1.7em;
+    }
 }
 
 pre {
