@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>FreeSASA Demo</title>
-    <meta name="description" content="Calculate solvent accessible surface area for PDB files, in the browser using web assembly.">
-    <meta name="author" content="Simon Mitternacht">
-    <meta name="keywords" content="SASA, Solvent Accessible Surface Area, PDB, Proteins">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="app.css">
+    <meta
+      name="description"
+      content="Calculate solvent accessible surface area for PDB files, in the browser using web assembly."
+    />
+    <meta name="author" content="Simon Mitternacht" />
+    <meta
+      name="keywords"
+      content="SASA, Solvent Accessible Surface Area, PDB, Proteins"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="app.css" />
     <script nomodule>
       alert("This app only works in modern browsers");
     </script>
     <script src="index.js"></script>
-</head>
-<body>
-<div class="app">
+  </head>
+  <body>
     <header>
-        <h1>FreeSASA Demo</h1>
+      <h1>FreeSASA Demo</h1>
     </header>
     <noscript>
-        This application requires browser support for Javascript (ES6) and WebAssembly
+      This application requires browser support for Javascript (ES6) and
+      WebAssembly
     </noscript>
     <main>
-        <form id="pdb-form">
-            <label>
-                PDB code
-                <input id="pdb-input" type="text" />
-            </label>
-            <button id="submit" disabled="true">Calculate</button>
-        </form>
-        <div id="output">
-            <p>Loading FreeSASA ...</p>
-        </div>
+      <form id="pdb-form">
+        <label>
+          PDB code
+          <input id="pdb-input" type="text" />
+        </label>
+        <button id="submit" disabled="true">Calculate</button>
+      </form>
+      <div id="output">
+        <p>Loading FreeSASA ...</p>
+      </div>
     </main>
     <footer>
-        Part of <a href="https://freesasa.github.io/">FreeSASA documentation</a>.
-        Powered by <a href="https://github.com/freesasa/freesasa-wasm">freesasa-wasm</a>
+      Part of
+      <a href="https://freesasa.github.io/">FreeSASA documentation</a>. Powered
+      by
+      <a href="https://github.com/freesasa/freesasa-wasm">freesasa-wasm</a>
     </footer>
-</div>
-</body>
-
+  </body>
 </html>

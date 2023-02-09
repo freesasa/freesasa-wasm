@@ -1,90 +1,75 @@
+html,
 body {
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Sans-serif;
+  font-size: 1.05rem;
+  --width: 80ch;
+  --light-color: hsl(214, 54%, 97%);
+  --dark-color: hsl(214, 20%, 15%);
+  --medium-color: hsl(212, 19%, 72%);
+  --light-gray-bg: hsl(214, 56%, 94%);
+  --medium-gray-bg: hsl(212, 33%, 90%);
+
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  line-height: 1.35;
 }
 
-.app {
-    text-align: center;
-    font-family: Roboto, sans-serif;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+* {
+  box-sizing: border-box;
 }
 
-header, footer {
-    width: 100%;
-    background-color: black;
-    color: white;
-    margin: 0;
-    padding: 15px;
+body {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-a:visited {
-    color: white;
+header,
+footer {
+  padding: 10px;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  text-align: center;
 }
-a:hover {
-    color: lightblue;
+
+header {
+  filter: drop-shadow(0 0 5px hsla(214 10% 50% / 0.5));
 }
-a:active {
-    color: white;
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--width);
+  margin: auto;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+}
+
+h1 {
+  font-size: clamp(1.2rem, 1rem + 3vw, 1.7rem);
+  margin: 10px;
 }
 
 main {
-    flex-grow: 1;
+  flex: 1;
+  max-width: var(--width);
+  margin: min(10px, 5vh) auto;
+  padding: 10px 20px;
 }
 
 footer {
-    padding: 20px;
+  color: var(--medium-color);
 }
 
-h1, h2 {
-    margin: 0;
+footer a {
+  color: var(--light-color);
 }
 
-@media (max-width: 800px) {
-    h1 {
-        font-size: 1.7em;
-    }
+footer a:hover {
+  color: var(--light-color);
+  filter: drop-shadow(0px 0px 6px hsla(0deg 0% 100% / 0.5));
 }
-
-pre {
-    display: block;
-    text-align: left;
-    max-width: 300px;
-    padding: 5px;
-}
-
-.not-found, .other-error, .calculation-failed {
-    padding: 0px 30px;
-    color: #d22;
-}
-
-input, button {
-    margin: 2rem 0.5rem;
-    padding: 0.7rem;
-    font-size: 1rem;
-    border-radius: 5px;
-}
-
-input {
-    width: 4rem;
-    border: 1px solid;
-}
-
-button {
-    background-color: #222;
-    color: #FFF;
-    text-decoration: none;
-    display: inline-block;
-    border: none;
-    text-align: center;
-}
-
-button[disabled] {
-    background-color: #555;
-    color: #aaa
-}
-
-
