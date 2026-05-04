@@ -6,7 +6,7 @@ body {
   width: 100%;
   font-family: Sans-serif;
   font-size: 1.05rem;
-  --width: 80ch;
+  --width: 100ch;
   --light-color: hsl(214, 54%, 97%);
   --dark-color: hsl(214, 20%, 15%);
   --medium-color: hsl(212, 19%, 72%);
@@ -59,6 +59,33 @@ main {
   max-width: var(--width);
   margin: min(10px, 5vh) auto;
   padding: 10px 20px;
+}
+
+form {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  
+  
+  button {
+    background: var(--light-gray-bg);
+    border-radius: 5px;
+    border: 2px solid var(--dark-color);
+    height: 2rem;
+    padding: 5px 10px;
+    will-change: transform;
+    transition: transform 0.1s;
+    font-size: 1.05rem;
+  }
+
+  button:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s;
+  }
+  
+  button:focus, button:hover {
+    background: var(--medium-gray-bg);
+  }
 }
 
 footer {

@@ -14,16 +14,17 @@ const states = {
 import("./freesasa.mjs")
   .then(obj => obj.default())
   .then(Module => {
-    freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string'])
+    freesasa_run = Module.cwrap('freesasa_run', 'number', ['string', 'string', 'string', 'string'])
     FS = Module.FS;
     setState(states.ready);
   });
 
 // wrap in fake async to allow DOM changes to propagate before starting CPU blocking calculation
-async function calcFreesasa(pdbCode, out, err) {
+async function calcFreesasa(pdbCode, out, err, options) {
   return new Promise(resolve =>
-    setTimeout(() => {
-        freesasa_run(pdbCode, out, err);
+    setTimeout(
+      () => {
+        freesasa_run(pdbCode, out, err, options);
         resolve();
       },
       0)
@@ -63,7 +64,7 @@ function setState(type, value) {
       const p = document.createElement("p");
       p.innerText = value;
       rootEl.appendChild(p);
-       break;
+      break;
     }
     case states.success: {
       const h2 = document.createElement("h2");
@@ -88,9 +89,12 @@ function setState(type, value) {
   }
 }
 
-window.onsubmit= (event) => {
+const form = document.getElementById("pdb-form");
+form.addEventListener('submit', function(event) {
   event.preventDefault();
-  const pdbCode = document.getElementById("pdb-input").value;
+  const formData = new FormData(this);
+  const pdbCode = formData.get('pdb-code');
+  const format = formData.get('format');
 
   setState(states.loading);
 
@@ -109,7 +113,12 @@ window.onsubmit= (event) => {
 
       setState(states.calculating);
 
-      const ret = await calcFreesasa(pdbCode, 'out', 'err');
+      let options = "32";
+      if (format === "rsa") {
+        options = "64"
+      }
+
+      const ret = await calcFreesasa(pdbCode, 'out', 'err', options);
 
       if (ret) {
         setState(states.calculationFailed, String.fromCharCode.apply(null, FS.readFile('err')));
@@ -125,4 +134,4 @@ window.onsubmit= (event) => {
       console.error(err);
       setState(states.otherError, err.message);
     });
-};
+});

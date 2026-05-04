@@ -1,13 +1,23 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "freesasa/src/freesasa.h"
 #include "freesasa/src/freesasa_internal.h"
 
+/**
+ * Simulate running a stripped down version of the CLI
+ *
+ * @param pdb_file name of input file
+ * @param output_file filename for stdout
+ * @param err_file filename for stderr
+ * @param optionsString can only be 32 (log) or 64 (RSA) for now
+ * */
 int
-freesasa_run(const char *pdb_file, const char* output_file, const char* err_file) {
+freesasa_run(const char *pdb_file, const char* output_file, const char* err_file, const char *optionsString) {
     freesasa_structure *structure = NULL;
     freesasa_node *tree = NULL;
     FILE *pdb = fopen(pdb_file, "r"), *err = fopen(err_file, "w"), *out = NULL;
     int ret = FREESASA_SUCCESS;
+    const int options = atoi(optionsString);
 
     if (!err) {
     	ret = FREESASA_FAIL;
@@ -43,7 +53,7 @@ freesasa_run(const char *pdb_file, const char* output_file, const char* err_file
         goto cleanup;
     }
 
-    ret = freesasa_tree_export(out, tree, FREESASA_LOG);
+    ret = freesasa_tree_export(out, tree, options);
     fclose(out);
 
  cleanup:

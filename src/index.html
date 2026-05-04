@@ -17,7 +17,6 @@
     <script nomodule>
       alert("This app only works in modern browsers");
     </script>
-    <script src="index.js"></script>
   </head>
   <body>
     <header>
@@ -31,9 +30,16 @@
       <form id="pdb-form">
         <label>
           PDB code
-          <input id="pdb-input" type="text" />
+          <input id="pdb-input" name="pdb-code" type="text" required/>
         </label>
-        <button id="submit" disabled="true">Calculate</button>
+        <label>
+          Output format
+          <select value="log" name="format">
+            <option value="log">Default log</option>
+            <option value="rsa">RSA</option>
+          </select>
+        </label>
+        <button id="submit">Calculate</button>
       </form>
       <div id="output">
         <p>Loading FreeSASA ...</p>
@@ -45,5 +51,6 @@
       by
       <a href="https://github.com/freesasa/freesasa-wasm">freesasa-wasm</a>
     </footer>
+    <script src="index.js"></script>
   </body>
 </html>
