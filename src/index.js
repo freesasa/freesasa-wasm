@@ -113,7 +113,7 @@ form.addEventListener('submit', function(event) {
 
       setState(states.calculating);
 
-      // pass options as strings to avoid trouble with JS numbers and C integers
+      // pass options as string to avoid trouble with JS numbers and C integers
       let options = (1 << 5).toString();
       if (format === "rsa") {
         options = (1 << 6).toString();
