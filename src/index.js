@@ -113,9 +113,12 @@ form.addEventListener('submit', function(event) {
 
       setState(states.calculating);
 
-      let options = "32";
+      // pass options as strings to avoid trouble with JS numbers and C integers
+      let options = (1 << 5).toString();
       if (format === "rsa") {
-        options = "64"
+        options = (1 << 6).toString();
+      } else if (format === "pdb") {
+        options = (1 << 9).toString();
       }
 
       const ret = await calcFreesasa(pdbCode, 'out', 'err', options);

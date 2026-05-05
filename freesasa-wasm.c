@@ -9,7 +9,7 @@
  * @param pdb_file name of input file
  * @param output_file filename for stdout
  * @param err_file filename for stderr
- * @param optionsString can only be 32 (log) or 64 (RSA) for now
+ * @param optionsString can only be string represenation of FREESASA_LOG, FREESASA_RSA or FREESASA_PDB
  * */
 int
 freesasa_run(const char *pdb_file, const char* output_file, const char* err_file, const char *optionsString) {
@@ -17,6 +17,8 @@ freesasa_run(const char *pdb_file, const char* output_file, const char* err_file
     freesasa_node *tree = NULL;
     FILE *pdb = fopen(pdb_file, "r"), *err = fopen(err_file, "w"), *out = NULL;
     int ret = FREESASA_SUCCESS;
+
+    // pass the options as a string and not number to avoid problems with JS numbers 
     const int options = atoi(optionsString);
 
     if (!err) {
