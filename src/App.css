@@ -63,19 +63,35 @@ main {
 
 form {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
-  align-items: center;
-  
-  
-  button {
-    background: var(--light-gray-bg);
+  align-items: end;
+
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input[type=text], button, select {
+    height: 2.2rem;
+    font-size: 1.05rem;
+    line-height: 1;
+    padding: 5px 10px;
     border-radius: 5px;
     border: 2px solid var(--dark-color);
-    height: 2rem;
-    padding: 5px 10px;
+  }
+
+  input[type=text] {
+    width: 8ch;
+    border-radius: 5px;
+    border: 2px solid var(--dark-color);
+  }
+  
+  button {
+    background: var(--dark-color);
+    color: var(--light-color);
     will-change: transform;
     transition: transform 0.1s;
-    font-size: 1.05rem;
   }
 
   button:hover {
@@ -84,7 +100,7 @@ form {
   }
   
   button:focus, button:hover {
-    background: var(--medium-gray-bg);
+    background: black;
   }
 }
 
